@@ -1,0 +1,7 @@
+#canvas{
+    background: green;
+    display: block;
+}
+body{
+    margin: 0; /*让页面与视可重合*/
+}
