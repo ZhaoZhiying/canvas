@@ -5,3 +5,16 @@
 body{
     margin: 0; /*让页面与视可重合*/
 }
+.actions{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+.action > #brush{
+    display: none;
+}.action.x > #brush{
+    display: inline-block;
+}
+.action.x > #eraser{
+    display: none;
+}
