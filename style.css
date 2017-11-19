@@ -1,5 +1,5 @@
 #canvas{
-    background: green;
+    background: white;
     display: block;
 }
 body{
@@ -7,14 +7,15 @@ body{
 }
 .actions{
     position: fixed;
-    bottom: 0;
-    left: 0;
+    bottom: 10px;
+    left: 10px;
 }
-.action > #brush{
+.actions > #brush{
     display: none;
-}.action.x > #brush{
+}
+.actions.x > #brush{
     display: inline-block;
 }
-.action.x > #eraser{
+.actions.x > #eraser{
     display: none;
 }

@@ -6,8 +6,7 @@ listenToUser(canvas)//2.监听鼠标事件
 
 //3.监听橡皮擦是否开启
 var eraserEnabled = false 
-eraser.onclick = function(){
-    //eraserEnabled = !eraserEnabled //如果是true，加!就变成false，反之一样
+    eraser.onclick = function(){
     eraserEnabled = true
     actions.className = 'actions x'
 }
@@ -15,6 +14,7 @@ brush.onclick = function(){
     eraserEnabled = false
     actions.className = 'actions'
 }
+
 function autoSetCanvasSize(canvas){
     setCanvasSize()
 
@@ -28,12 +28,14 @@ function autoSetCanvasSize(canvas){
         canvas.height = pageHeight
     }
 }
+
 function drawCircle(x,y,radius){//画圆
     context.beginPath()
     context.strokeStyle = 'black'
     context.arc(x,y,radius,0,Math.PI*2)
     context.fill()   
 }
+
 function drawLine(x1,y1,x2,y2){//画线
     context.beginPath()
     context.strokeStyle = 'black'
