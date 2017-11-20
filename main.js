@@ -52,22 +52,24 @@ function listenToUser(canvas){
         x: undefined,
         y: undefined
     }
-    if(document.body.ontouchstart !== undefined){//特性检测，检测的是特性不是设备
-        //触屏设备，支持多点触控
-            canvas.ontouchstart = function(aaa){
-                var x = aaa.touches[0].clientX //相对于视可位置，不是相对于canvas
-                var y = aaa.touches[0].clientY
-                using = true
-                if(eraserEnabled){
-                    context.clearRect(x-5,y-5,20,20)//橡皮擦擦除
-                } else{
-                        lastPoint = {
-                            "x":x, 
-                            "y":y
-                } //第一个x、y的坐标
+    if (document.body.ontouchstart !== undefined){ //特性检测
+        //触屏设备
+        document.documentElement.ontouchstart = function(aaa){
+            console.log('开始')
+            var x = aaa.touches[0].clientX 
+            var y = aaa.touches[0].clientY
+            using = true
+            if(eraserEnabled){
+                context.clearRect(x-5,y-5,20,20)
+            } else{
+                    lastPoint = {
+                        "x":x, 
+                        "y":y
+              } //第一个x、y的坐标
             }
         }
-        canvas.ontouchmove = function(){  
+        document.documentElement.ontouchmove = function(aaa){
+            console.log('进行')
             var x = aaa.touches[0].clientX 
             var y = aaa.touches[0].clientY
             if(!using){ 
@@ -83,9 +85,10 @@ function listenToUser(canvas){
                     drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y) //新的点连接旧的点 = 线
                     lastPoint = newPoint //新的点变成旧的点
             }
-          }      
-        canvas.ontouchend = function(){
-            using = false       
+        }
+        document.documentElement.ontouchend = function(aaa){
+            console.log('结束')
+            using = false
         }
     }else{
         //非触屏设备
@@ -102,7 +105,7 @@ function listenToUser(canvas){
               } //第一个x、y的坐标
             }
         }
-        canvas.onmousemove = function(aaa){ 
+        canvas.onmousemove = function(aaa){
             var x = aaa.clientX 
             var y = aaa.clientY
             if(!using){ 
@@ -114,13 +117,15 @@ function listenToUser(canvas){
                     var newPoint = {
                         "x":x, 
                         "y":y
-                    } //新的 
+                    } //新的点 
                     drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y) //新的点连接旧的点 = 线
                     lastPoint = newPoint //新的点变成旧的点
             }
+        }    
         canvas.onmouseup = function(aaa){
             using = false    
         }
-     }
     }
-}
+    }
+        
+

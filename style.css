@@ -1,9 +1,9 @@
+body{
+    margin: 0; /*让页面与视可重合*/
+}
 #canvas{
     background: white;
     display: block;
-}
-body{
-    margin: 0; /*让页面与视可重合*/
 }
 .actions{
     position: fixed;
