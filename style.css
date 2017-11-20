@@ -80,8 +80,8 @@ ul,ol{
 .colors>li.active {/*选中激活状态*/
     transform: scale(1.5);  
 }
-.colors>li.gray{
-    background: #999;
+.colors>li.black{
+    background: #333;
 }
 .colors>li.orange{
     background: rgb(253, 148, 13);

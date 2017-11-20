@@ -31,10 +31,10 @@ thick.onclick = function(){
 }
 
 //改颜色
-gray.onclick = function(){
-    context.fillStyle = 'gray'
-    context.strokeStyle = 'gray'
-    gray.classList.add('active')
+black.onclick = function(){
+    context.fillStyle = 'black'
+    context.strokeStyle = 'black'
+    black.classList.add('active')
     orange.classList.remove('active')
     blue.classList.remove('active')
     green.classList.remove('active')
