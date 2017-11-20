@@ -1,5 +1,6 @@
 var canvas = document.getElementById('canvas');  //获取 canvas 的 id
 var context = canvas.getContext('2d'); //获取绘画上下文
+var lineWidth = 5
 
 autoSetCanvasSize(canvas)//1.监听宽高变化
 listenToUser(canvas)//2.监听鼠标事件
@@ -95,7 +96,7 @@ function autoSetCanvasSize(canvas){
 
 function drawCircle(x,y,radius){//画圆
     context.beginPath()
-    context.arc(x,y,radius,0,Math.PI*2)
+    context.arc(x, y, radius, 0, Math.PI*2)
     context.fill()   
 }
 
@@ -117,7 +118,6 @@ function listenToUser(canvas){
     if (document.body.ontouchstart !== undefined){ //特性检测
         //触屏设备
         document.documentElement.ontouchstart = function(aaa){
-            console.log('开始')
             var x = aaa.touches[0].clientX 
             var y = aaa.touches[0].clientY
             using = true
@@ -131,7 +131,6 @@ function listenToUser(canvas){
             }
         }
         document.documentElement.ontouchmove = function(aaa){
-            console.log('进行')
             var x = aaa.touches[0].clientX 
             var y = aaa.touches[0].clientY
             if(!using){ 
@@ -149,7 +148,6 @@ function listenToUser(canvas){
             }
         }
         document.documentElement.ontouchend = function(aaa){
-            console.log('结束')
             using = false
         }
     }else{
