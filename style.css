@@ -1,21 +1,103 @@
 body{
     margin: 0; /*让页面与视可重合*/
+    overflow: hidden;
+}
+*{
+    margin: 0;
+    padding: 0;
 }
 #canvas{
     background: white;
     display: block;
 }
-.actions{
+ul,ol{
+    list-style: none;
+}
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+ }
+ .sidebar{
+    width: 40px;
+    height: 100vh;
+    background: #243451;
     position: fixed;
-    bottom: 10px;
-    left: 10px;
+    top: 0;
+    left: 0;
 }
-.actions > #brush{
-    display: none;
+.actions{
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px;
+    margin-top: 10px;
+    margin-bottom: 30px;
 }
-.actions.x > #brush{
-    display: inline-block;
+.actions svg{
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+    transition: all 0.3s;
 }
-.actions.x > #eraser{
-    display: none;
+.actions svg.active{
+    transform: scale(1.5);
+}
+.sizes{
+    margin-left: 10px;
+    margin-bottom: 30px;
+    transition: all 0.3s;
+}
+.sizes>li.active{
+    transform: scale(1.5);  
+}
+.sizes> .thin{
+    width: 20px;
+    height: 2px; 
+    background: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;       
+}
+.sizes> .thick{
+    width: 20px;
+    height: 4px; 
+    background: #fff; 
+}
+.colors{
+    margin-left: 10px;
+    margin-bottom: 30px;
+}
+.colors>li{
+    margin: 10px 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+.colors>li.active {/*选中激活状态*/
+    transform: scale(1.5);  
+}
+.colors>li.gray{
+    background: #999;
+}
+.colors>li.orange{
+    background: rgb(253, 148, 13);
+}
+.colors>li.blue{
+    background: rgb(42, 174, 245);
+}
+.colors>li.green{
+    background: rgb(104, 216, 69);
+}
+.else{
+    display: flex;
+    flex-direction: column;
+}
+.else svg{
+    width: 22px;
+    height: 22px;
+    fill: #fff;
+    transition: all 0.3s;
+    margin-left: 9px;
+    padding-bottom: 10px;
 }

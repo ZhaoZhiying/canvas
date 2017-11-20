@@ -6,13 +6,77 @@ listenToUser(canvas)//2.监听鼠标事件
 
 //3.监听橡皮擦是否开启
 var eraserEnabled = false 
-    eraser.onclick = function(){
-    eraserEnabled = true
-    actions.className = 'actions x'
-}
 brush.onclick = function(){
     eraserEnabled = false
-    actions.className = 'actions'
+    brush.classList.add('active')
+    eraser.classList.remove('active')
+}
+eraser.onclick = function(){
+    eraserEnabled = true
+    brush.classList.remove('active')
+    eraser.classList.add('active')
+}
+
+//线的大小
+thin.onclick = function(){
+    lineWidth = 5
+    thin.classList.add('active')
+    thick.classList.remove('active')
+}
+thick.onclick = function(){
+    lineWidth = 10
+    thin.classList.remove('active')
+    thick.classList.add('active')
+}
+
+//改颜色
+gray.onclick = function(){
+    context.fillStyle = 'gray'
+    context.strokeStyle = 'gray'
+    gray.classList.add('active')
+    orange.classList.remove('active')
+    blue.classList.remove('active')
+    green.classList.remove('active')
+}
+orange.onclick = function(){
+    context.fillStyle = 'orange'
+    context.strokeStyle = 'orange'
+    gray.classList.remove('active')
+    orange.classList.add('active')
+    blue.classList.remove('active')
+    green.classList.remove('active')
+}
+blue.onclick = function(){
+    context.fillStyle = 'blue'
+    context.strokeStyle = 'blue'
+    gray.classList.remove('active')
+    orange.classList.remove('active')
+    blue.classList.add('active')
+    green.classList.remove('active')
+}
+green.onclick = function(){
+    context.fillStyle = 'green'
+    context.strokeStyle = 'green'
+    gray.classList.remove('active')
+    orange.classList.remove('active')
+    blue.classList.remove('active')
+    green.classList.add('active')
+}
+
+//清除
+clear.onclick = function(){
+    context.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+//保存
+download.onclick = function(){
+    var url = canvas.toDataURL("image/png")
+    var a = document.createElement('a')//生成 a 标签
+    document.body.appendChild(a) //放到页面
+    a.href = url
+    a.target = '_blank'
+    a.download = 'haha' // 保存名
+    a.click()//调用 a 的 click (a 被点一下)
 }
 
 function autoSetCanvasSize(canvas){
@@ -31,16 +95,14 @@ function autoSetCanvasSize(canvas){
 
 function drawCircle(x,y,radius){//画圆
     context.beginPath()
-    context.strokeStyle = 'black'
     context.arc(x,y,radius,0,Math.PI*2)
     context.fill()   
 }
 
 function drawLine(x1,y1,x2,y2){//画线
     context.beginPath()
-    context.strokeStyle = 'black'
     context.moveTo(x1, y1) //起点
-    context.lineWidth = 5
+    context.lineWidth = lineWidth
     context.lineTo(x2, y2) //终点
     context.stroke()
     context.closePath()
