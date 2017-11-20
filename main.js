@@ -42,7 +42,7 @@ black.onclick = function(){
 orange.onclick = function(){
     context.fillStyle = 'orange'
     context.strokeStyle = 'orange'
-    gray.classList.remove('active')
+    black.classList.remove('active')
     orange.classList.add('active')
     blue.classList.remove('active')
     green.classList.remove('active')
@@ -50,7 +50,7 @@ orange.onclick = function(){
 blue.onclick = function(){
     context.fillStyle = 'blue'
     context.strokeStyle = 'blue'
-    gray.classList.remove('active')
+    black.classList.remove('active')
     orange.classList.remove('active')
     blue.classList.add('active')
     green.classList.remove('active')
@@ -58,7 +58,7 @@ blue.onclick = function(){
 green.onclick = function(){
     context.fillStyle = 'green'
     context.strokeStyle = 'green'
-    gray.classList.remove('active')
+    black.classList.remove('active')
     orange.classList.remove('active')
     blue.classList.remove('active')
     green.classList.add('active')

@@ -67,14 +67,13 @@ ul,ol{
     background: #fff; 
 }
 .colors{
-    margin-left: 10px;
-    margin-bottom: 30px;
+    position: fixed;
+    left: 50px;
+    top: 140px;
 }
 .colors>li{
-    margin: 10px 0;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+    width: 10px;
+    height: 40px;
     transition: all 0.3s;
 }
 .colors>li.active {/*选中激活状态*/
