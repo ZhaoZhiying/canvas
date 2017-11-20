@@ -77,7 +77,7 @@ ul,ol{
     transition: all 0.3s;
 }
 .colors>li.active {/*选中激活状态*/
-    transform: scale(1.5);  
+    border: 1px blue solid; 
 }
 .colors>li.black{
     background: #333;
