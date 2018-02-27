@@ -6,38 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>我的画板</title>
     <link href="style.css" rel="stylesheet" />
-    <script src="//at.alicdn.com/t/font_480616_6h51cyyuvphtcsor.js"></script>
 </head>
 <body>
-    <canvas id="canvas" width=300 height=300></canvas>
-    <div class="sidebar">
-        <div class="actions" id="actions">
-                <svg class="icon" id="brush">
-                        <use xlink:href="#icon-huabi"></use>
-                </svg>
-                <svg class="icon" id="eraser">
-                        <use xlink:href="#icon-xiangpi"></use>
-                </svg>        
+    <canvas id="canvas"></canvas>
+
+        <div class="brush" id="brush">
+                <img class="black" id="black" src="./icon/black_s.png"></img>
+                <img class="blue" id="blue" src="./icon/blue_n.png"></img>
+                <img class="red" id="red" src="./icon/red_n.png"></img>
+                <img class="green" id="green" src="./icon/green_n.png"></img>
         </div>
-        <ol class="sizes">
-                <li class="thin" id="thin"></li>
-                <li class="thick" id="thick"></li>
-        </ol>
-        <div class="else">
-            <svg class="icon" id="download">
-                    <use xlink:href="#icon-xiazai"></use>
-            </svg> 
-            <svg class="icon" id="clear">
-                    <use xlink:href="#icon-shanchu"></use>
-            </svg> 
+
+        <div class="eraser-wrapper" id="eraser-wrapper">
+                <img id="eraser" class="eraser" src="./icon/eraser_n.png"></img>        
         </div>
-    </div>
-    <ol class="colors">
-            <li class="black" id="black"></li>
-            <li class="orange" id="orange"></li>
-            <li class="blue" id="blue"></li>
-            <li class="green" id="green"></li>
-    </ol>
+
+        <div class="sizes" id="sizes">
+                <img class="thin" id="thin" src="./icon/thin_s.png"></img>
+                <img class="thick" id="thick" src="./icon/thick_n.png"></img>
+                <img class="bold" id="bold" src="./icon/bold_n.png"></img>
+        </div>
+
+        <div class="else" id="else">
+                <img class="download" id="download" src="./icon/download.png"></img> 
+                <img class="clear" id="clear" src="./icon/clear.png"></img> 
+        </div>
+
     <script type="text/javascript" src="main.js"></script>
 </body>
 </html>

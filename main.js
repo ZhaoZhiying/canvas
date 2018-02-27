@@ -9,59 +9,79 @@ listenToUser(canvas)//2.监听鼠标事件
 var eraserEnabled = false 
 brush.onclick = function(){
     eraserEnabled = false
-    brush.classList.add('active')
-    eraser.classList.remove('active')
+    eraser.src = "./icon/eraser_n.png"
 }
 eraser.onclick = function(){
     eraserEnabled = true
-    brush.classList.remove('active')
-    eraser.classList.add('active')
+    eraser.src = "./icon/eraser_s.png"
 }
 
 //线的大小
 thin.onclick = function(){
-    lineWidth = 5
-    thin.classList.add('active')
-    thick.classList.remove('active')
+    lineWidth = 2
+    if(thin.src="./icon/thin_n.png"){
+        thin.src="./icon/thin_s.png"
+        thick.src="./icon/thin_n.png"
+        bold.src="./icon/thin_n.png"
+    }
 }
 thick.onclick = function(){
+    lineWidth = 6
+    if(thick.src="./icon/thin_n.png"){
+        thick.src="./icon/thin_s.png"
+        thin.src="./icon/thin_n.png"
+        bold.src="./icon/thin_n.png"
+    }
+}
+bold.onclick = function(){
     lineWidth = 10
-    thin.classList.remove('active')
-    thick.classList.add('active')
+    if(bold.src="./icon/thin_n.png"){
+        bold.src="./icon/thin_s.png"
+        thin.src="./icon/thin_n.png"
+        thick.src="./icon/thin_n.png"
+    }
 }
 
 //改颜色
 black.onclick = function(){
-    context.fillStyle = 'black'
-    context.strokeStyle = 'black'
-    black.classList.add('active')
-    orange.classList.remove('active')
-    blue.classList.remove('active')
-    green.classList.remove('active')
-}
-orange.onclick = function(){
-    context.fillStyle = 'orange'
-    context.strokeStyle = 'orange'
-    black.classList.remove('active')
-    orange.classList.add('active')
-    blue.classList.remove('active')
-    green.classList.remove('active')
+    context.fillStyle = '#23262d'
+    context.strokeStyle = '#23262d'
+    if(black.src="./icon/black_n.png"){
+        black.src="./icon/black_s.png"
+        blue.src="./icon/blue_n.png"
+        red.src="./icon/red_n.png"
+        green.src="./icon/green_n.png"
+    }
 }
 blue.onclick = function(){
-    context.fillStyle = 'blue'
-    context.strokeStyle = 'blue'
-    black.classList.remove('active')
-    orange.classList.remove('active')
-    blue.classList.add('active')
-    green.classList.remove('active')
+    context.fillStyle = '#0000ff'
+    context.strokeStyle = '#0000ff'
+    if(blue.src="./icon/blue_n.png"){
+        blue.src="./icon/blue_s.png"
+        black.src="./icon/black_n.png"
+        red.src="./icon/red_n.png"
+        green.src="./icon/green_n.png"
+    }
+}
+red.onclick = function(){
+    context.fillStyle = '#ff0000'
+    context.strokeStyle = '#ff0000'
+    if(red.src="./icon/red_n.png"){
+        red.src="./icon/red_s.png"
+        black.src="./icon/black_n.png"
+        blue.src="./icon/blue_n.png"
+        green.src="./icon/green_n.png"
+    }
 }
 green.onclick = function(){
-    context.fillStyle = 'green'
-    context.strokeStyle = 'green'
-    black.classList.remove('active')
-    orange.classList.remove('active')
-    blue.classList.remove('active')
-    green.classList.add('active')
+    context.fillStyle = '#509b36'
+    context.strokeStyle = '#509b36'
+    if(green.src="./icon/green_n.png"){
+        green.src="./icon/green_s.png"
+        black.src="./icon/black_n.png"
+        red.src="./icon/red_n.png"
+        blue.src="./icon/blue_n.png"
+    }
 }
 
 //清除
@@ -76,10 +96,11 @@ download.onclick = function(){
     document.body.appendChild(a) //放到页面
     a.href = url
     a.target = '_blank'
-    a.download = 'haha' // 保存名
+    a.download = '我的画儿' // 保存名
     a.click()//调用 a 的 click (a 被点一下)
 }
 
+//画布大小
 function autoSetCanvasSize(canvas){
     setCanvasSize()
 
@@ -94,13 +115,15 @@ function autoSetCanvasSize(canvas){
     }
 }
 
-function drawCircle(x,y,radius){//画圆
+//画圆
+function drawCircle(x,y,radius){
     context.beginPath()
     context.arc(x, y, radius, 0, Math.PI*2)
     context.fill()   
 }
 
-function drawLine(x1,y1,x2,y2){//画线
+//画线
+function drawLine(x1,y1,x2,y2){
     context.beginPath()
     context.moveTo(x1, y1) //起点
     context.lineWidth = lineWidth
@@ -115,7 +138,7 @@ function listenToUser(canvas){
         x: undefined,
         y: undefined
     }
-    if (document.body.ontouchstart !== undefined){ //特性检测
+    if(document.body.ontouchstart !== undefined){ //特性检测
         //触屏设备
         document.documentElement.ontouchstart = function(aaa){
             var x = aaa.touches[0].clientX 
@@ -124,10 +147,10 @@ function listenToUser(canvas){
             if(eraserEnabled){
                 context.clearRect(x-5,y-5,20,20)
             } else{
-                    lastPoint = {
-                        "x":x, 
-                        "y":y
-              } //第一个x、y的坐标
+                lastPoint = {
+                    "x":x, 
+                    "y":y
+                } //第一个x、y的坐标
             }
         }
         document.documentElement.ontouchmove = function(aaa){
@@ -139,10 +162,10 @@ function listenToUser(canvas){
             if(eraserEnabled){
                     context.clearRect(x-5,y-5,10,10)
             } else{
-                    var newPoint = {
-                        "x":x, 
-                        "y":y
-                    } //新的 
+                var newPoint = {
+                    "x":x, 
+                    "y":y
+                } //新的 
                     drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y) //新的点连接旧的点 = 线
                     lastPoint = newPoint //新的点变成旧的点
             }
@@ -158,11 +181,11 @@ function listenToUser(canvas){
             using = true
             if(eraserEnabled){
                 context.clearRect(x-5,y-5,20,20)//橡皮擦擦除
-            } else{
-                    lastPoint = {
-                        "x":x, 
-                        "y":y
-              } //第一个x、y的坐标
+            }else{
+                lastPoint = {
+                    "x":x, 
+                    "y":y
+                } //第一个x、y的坐标
             }
         }
         canvas.onmousemove = function(aaa){
@@ -173,19 +196,19 @@ function listenToUser(canvas){
             }
             if(eraserEnabled){
                     context.clearRect(x-5,y-5,10,10)
-            } else{
-                    var newPoint = {
-                        "x":x, 
-                        "y":y
-                    } //新的点 
-                    drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y) //新的点连接旧的点 = 线
-                    lastPoint = newPoint //新的点变成旧的点
+            }else{
+                var newPoint = {
+                    "x":x, 
+                    "y":y
+                } //新的点 
+                drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y) //新的点连接旧的点 = 线
+                lastPoint = newPoint //新的点变成旧的点
             }
         }    
         canvas.onmouseup = function(aaa){
             using = false    
         }
     }
-    }
+}
         
 
