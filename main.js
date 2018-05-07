@@ -1,5 +1,6 @@
-var canvas = document.getElementById('canvas');  //获取 canvas 的 id
-var context = canvas.getContext('2d'); //获取绘画上下文
+
+var canvas = document.getElementById('canvas') //获取 canvas 的 id
+var context = canvas.getContext('2d') //获取绘画上下文
 var lineWidth = 5
 
 autoSetCanvasSize(canvas)//1.监听宽高变化
@@ -14,6 +15,20 @@ brush.onclick = function(){
 eraser.onclick = function(){
     eraserEnabled = true
     eraser.src = "./icon/eraser_s.png"
+}
+//清除
+clear.onclick = function(){
+    context.clearRect(0, 0, canvas.width, canvas.height);
+}
+//保存
+download.onclick = function(){
+    var url = canvas.toDataURL("image/png")
+    var a = document.createElement('a')
+    document.body.appendChild(a) 
+    a.href = url
+    a.target = '_blank'
+    a.download = '我的画儿' 
+    a.click()
 }
 
 //线的大小
@@ -84,29 +99,13 @@ green.onclick = function(){
     }
 }
 
-//清除
-clear.onclick = function(){
-    context.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-//保存
-download.onclick = function(){
-    var url = canvas.toDataURL("image/png")
-    var a = document.createElement('a')//生成 a 标签
-    document.body.appendChild(a) //放到页面
-    a.href = url
-    a.target = '_blank'
-    a.download = '我的画儿' // 保存名
-    a.click()//调用 a 的 click (a 被点一下)
-}
-
 //画布大小
 function autoSetCanvasSize(canvas){
     setCanvasSize()
-
     window.onresize = function(){
         setCanvasSize()
     }
+    //页面宽高
     function setCanvasSize(){
         var pageWidth = document.documentElement.clientWidth    
         var pageHeight = document.documentElement.clientHeight
@@ -125,87 +124,86 @@ function drawCircle(x,y,radius){
 //画线
 function drawLine(x1,y1,x2,y2){
     context.beginPath()
-    context.moveTo(x1, y1) //起点
+    context.moveTo(x1, y1)
     context.lineWidth = lineWidth
-    context.lineTo(x2, y2) //终点
+    context.lineTo(x2, y2)
     context.stroke()
     context.closePath()
 }
 
 function listenToUser(canvas){
-    var using = false //声明是否在用
-    var lastPoint = { //声明变量最后一个点
+    var using = false
+    var lastPoint = {
         x: undefined,
         y: undefined
     }
-    if(document.body.ontouchstart !== undefined){ //特性检测
-        //触屏设备
-        document.documentElement.ontouchstart = function(aaa){
-            var x = aaa.touches[0].clientX 
-            var y = aaa.touches[0].clientY
+    //特性检测
+    if(document.body.ontouchstart !== undefined){ //触屏设备
+        canvas.ontouchstart = function(e){
+            var x = e.touches[0].clientX 
+            var y = e.touches[0].clientY
             using = true
             if(eraserEnabled){
                 context.clearRect(x-5,y-5,20,20)
-            } else{
+            }else{
                 lastPoint = {
-                    "x":x, 
-                    "y":y
-                } //第一个x、y的坐标
+                    "x": x, 
+                    "y": y
+                } 
             }
         }
-        document.documentElement.ontouchmove = function(aaa){
-            var x = aaa.touches[0].clientX 
-            var y = aaa.touches[0].clientY
+        canvas.ontouchmove = function(e){
+            var x = e.touches[0].clientX 
+            var y = e.touches[0].clientY
             if(!using){ 
                 return 
             }
             if(eraserEnabled){
-                    context.clearRect(x-5,y-5,10,10)
-            } else{
+                context.clearRect(x-5,y-5,10,10)
+            }else{
                 var newPoint = {
-                    "x":x, 
-                    "y":y
-                } //新的 
-                    drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y) //新的点连接旧的点 = 线
-                    lastPoint = newPoint //新的点变成旧的点
+                    "x": x, 
+                    "y": y
+                } 
+                drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
+                lastPoint = newPoint
             }
         }
-        document.documentElement.ontouchend = function(aaa){
+        canvas.ontouchend = function(e){
             using = false
         }
-    }else{
-        //非触屏设备
-        canvas.onmousedown = function(aaa){
-            var x = aaa.clientX //相对于视可位置，不是相对于canvas
-            var y = aaa.clientY
+    }else{//非触屏设备
+        canvas.onmousedown = function(e){
+            var x = e.clientX //相对于视可位置，不是相对于canvas
+            var y = e.clientY
             using = true
             if(eraserEnabled){
-                context.clearRect(x-5,y-5,20,20)//橡皮擦擦除
+                context.clearRect(x-5,y-5,20,20)
             }else{
                 lastPoint = {
-                    "x":x, 
-                    "y":y
-                } //第一个x、y的坐标
+                    "x": x, 
+                    "y": y
+                } 
             }
         }
-        canvas.onmousemove = function(aaa){
-            var x = aaa.clientX 
-            var y = aaa.clientY
+        canvas.onmousemove = function(e){
+            var x = e.clientX 
+            var y = e.clientY
             if(!using){ 
                 return 
             }
             if(eraserEnabled){
-                    context.clearRect(x-5,y-5,10,10)
+                context.clearRect(x-5,y-5,10,10)
             }else{
                 var newPoint = {
-                    "x":x, 
-                    "y":y
-                } //新的点 
-                drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y) //新的点连接旧的点 = 线
-                lastPoint = newPoint //新的点变成旧的点
+                    "x": x, 
+                    "y": y
+                }
+                drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y) 
+                lastPoint = newPoint 
             }
         }    
-        canvas.onmouseup = function(aaa){
+        canvas.onmouseup = function(e){
             using = false    
         }
     }
